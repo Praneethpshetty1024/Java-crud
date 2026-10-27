@@ -1,6 +1,5 @@
 package com.example.crud.controller;
 
-import com.example.crud.dto.CreateUserRequest;
 import com.example.crud.model.User;
 import com.example.crud.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +17,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createUser(@RequestBody CreateUserRequest request) {
-        User user = new User();
-        user.setName(request.getName());
-        user.setEmail(request.getEmail());
+    public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
@@ -29,4 +25,10 @@ public class UserController {
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
+
+    @PutMapping("/users/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    user.setId(id);
+    return userService.updateUser(user);
+}
 }
