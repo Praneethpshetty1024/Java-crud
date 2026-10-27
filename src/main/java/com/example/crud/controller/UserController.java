@@ -2,6 +2,7 @@ package com.example.crud.controller;
 
 import com.example.crud.model.User;
 import com.example.crud.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +27,16 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return userService.getUserById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PutMapping("/users/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
-    user.setId(id);
-    return userService.updateUser(user);
-}
+        user.setId(id);
+        return userService.updateUser(user);
+    }
 }

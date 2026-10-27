@@ -3,6 +3,7 @@ package com.example.crud.service;
 import com.example.crud.model.User;
 import com.example.crud.repository.UserRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,6 +29,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) {
-    return userRepository.save(user);
-}
+        return userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
 }
