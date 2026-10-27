@@ -1,15 +1,23 @@
+package com.example.crud.service;
+
+import com.example.crud.model.User;
+import com.example.crud.repository.UserRepository;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public User createUser(User user) { 
+    public User createUser(User user) {
+        if (user.getId() != null) {
+            user.setId(null);
+        }
         return userRepository.save(user);
     }
 
