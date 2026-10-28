@@ -9,4 +9,5 @@ User createUser(User user);
 List<User> getAllUsers();
 User updateUser(User user);
 Optional<User> getUserById(Long id);
+void deleteUser(Long id);
 }
